@@ -16,6 +16,9 @@ var UserSchema = new Schema({
 	},
 	logindate: {
 		type: Date
+	},
+	regdate: {
+		type: Date
 	}
 }, {
 	strict: false

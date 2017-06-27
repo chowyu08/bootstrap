@@ -41,7 +41,7 @@
 <div class="container">
     <div class="row">
     	<div class="col-sm-4">
-			<form class="form-horizontal" role="form" id="loginForm" action="/user/register" method="post">
+			<form class="form-horizontal" role="form" id="registerForm" action="/user/register" method="post">
 				  <div class="form-group">
 				    <label for="name" class="col-sm-3 control-label">Name</label>
 				    <div class="col-sm-9">
@@ -67,15 +67,6 @@
 				    </div>
 				  </div>				  
 				  <div class="form-group">
-				    <div class="col-sm-offset-3 col-sm-9">
-				      <div class="checkbox">
-				        <label>
-				          <input type="checkbox">Remeber me
-				        </label>
-				      </div>
-				    </div>
-				  </div>
-				  <div class="form-group">
 				    <div class="col-sm-offset-2 col-sm-10">
 						<div class="col-sm-offset-2 col-sm-4">
 				     	   <button type="submit" id="submit" class="btn btn-info">Sublimt</button>
@@ -91,7 +82,7 @@
 		</div>
 	</div>
 </div>
-<script src="/static/js/login.js"></script>
+<script src="/static/js/register.js"></script>
 <script type="text/javascript">
 	$(document).ready(function () {
 		$("#submit").on("click", function () {
@@ -100,8 +91,8 @@
 			var email = $("#email").val();
 			var phone = $("#phone").val();
 			var password = $("#password").val();
-			var login = new LoginJS(username, email, phone, password);
-			$("#loginForm").submit();
+			var login = new RegisterJS(username, email, phone, password);
+			$("#registerForm").submit();
 		});
 	})
 	function checkInput() {
