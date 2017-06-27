@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var userModel =require('../models/user.js')
 
 /* GET users listing. */
 router.get('/', function(req, res) {
@@ -9,7 +10,7 @@ router.get('/', function(req, res) {
 router.post('/register', function(req,res) {
 	// res.send(req.body);
 	// res.json({data:req.body});
-	res.render('index', { title: 'Express',name:'joy' });
+	// res.render('index', { title: 'Express',name:'joy' });
 })
 
 module.exports = router;
