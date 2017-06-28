@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var session = require('express-session');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -8,12 +7,11 @@ router.get('/', function(req, res, next) {
 	if (sess.user) {
 		res.render('index', {
 			title: 'Express',
-			name: 'namew'
+			name: sess.user
 		});
 	} else {
-		res.redirect('/user');
+		res.redirect('/user/login');
 	}
-
 });
 
 module.exports = router;

@@ -11,7 +11,6 @@ var users = require('./routes/users');
 
 var app = express();
 
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.engine('html', require('ejs').renderFile);
@@ -26,20 +25,20 @@ app.use(bodyParser.urlencoded({
 	extended: false
 }));
 app.use(cookieParser());
+//session
+app.use(session({
+	secret: 'secret',
+	resave: false,
+	saveUninitialized: true,
+	cookie: {
+		maxAge: 1000 * 60 * 30
+	}
+}));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/static', express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/user', users);
 
-//session
-app.use(session({
-	secret: 'secret',
-	resave: true,
-	saveUninitialized: false,
-	cookie: {
-		maxAge: 1000 * 60 * 30
-	}
-}));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
