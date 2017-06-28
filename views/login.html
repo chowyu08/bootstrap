@@ -40,12 +40,12 @@
 <div style="height: 100px;"></div>
 <div class="container">
     <div class="row">
-    	<div class="col-sm-4">
-			<form class="form-horizontal" role="form" id="loginForm" action="/user/login" method="post">
+    	<div class="col-sm-5">
+			<form class="form-horizontal" role="form" id="loginForm" onsubmit="return false" method="post">
 				  <div class="form-group">
 				    <label for="name" class="col-sm-3 control-label">Name</label>
 				    <div class="col-sm-9">
-				      <input type="text" class="form-control" name="username" id="name" placeholder="please input name">
+				      <input type="text" class="form-control" name="username" id="username" placeholder="please input name">
 				    </div>
 				  </div>
 				  <div class="form-group">
@@ -66,7 +66,7 @@
 				  <div class="form-group">
 				    <div class="col-sm-offset-2 col-sm-10">
 						<div class="col-sm-offset-2 col-sm-4">
-				     	   <button type="submit" id="submit" class="btn btn-info">Sublimt</button>
+				     	   <button type="button" id="submit" class="btn btn-info">Sublimt</button>
 				        </div>
 				        <div class="col-sm-6">
 				     	   <button type="button" id="register" onclick="location='/user/register' " class="btn btn-error">Register</button>
@@ -75,7 +75,7 @@
 				  </div>
 			</form>
 		</div>
-		<div class="col-sm-8">
+		<div class="col-sm-7">
 			<div class="col-sm-offset-1 col-sm-11">
 				<img src="/static/images/register.jpg" class="img-responsive" alt="Cinque Terre"> 
 			</div>
@@ -85,22 +85,45 @@
 <script type="text/javascript">
 	$(document).ready(function () {
 		$("#submit").on("click", function () {
-			checkInput();
-			$("#loginForm").submit();
+			if ($("#username").val() == "") {
+				alert("username is null");
+				$("#username").focus();
+				return ;
+			}
+			if ($("#password").val() == "") {
+				alert("user password is null");
+				$("#password").focus();
+				return ;
+			}
+			var username = $("#username").val();
+			var password = $("#password").val();
+			var data = {"username":username, "password":password};
+			$.ajax({ 
+                url: '/user/login',
+                type: 'post',
+                data: data,
+                success: function(data, status){
+                	console.log("status: " + status)
+                	console.log("data: " + JSON.stringify(data))
+                    if(status == 'success'){
+                    	if (data.status == "success") {
+                    		alert("user login success!");
+                        	location.href ='/';
+                    	}else{
+                    		alert("user login failed! " + data.detail);
+                    		location.href = '/user';
+                    	}
+                    }
+                },
+                error: function(data, err){
+                	alert("error!" + err);
+                	console.log("data: " + data)
+                    location.href = '/user';
+                }
+            }); 
+
 		});
 	})
-	function checkInput() {
-		if ($("#name").val() == "") {
-			alert("username is null");
-			$("#name").focus();
-			return false;
-		}
-		if ($("#password").val() == "") {
-			alert("user password is null");
-			$("#password").focus();
-			return false;
-		}
-	}
 </script>
 </body>
 </html>

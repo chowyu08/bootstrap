@@ -15,18 +15,39 @@ router.post('/login', function(req, res) {
 	var conditions = {
 		username: req.body.username
 	};
-	userModel.find(conditions, function(err, result) {
+	userModel.findOne(conditions, function(err, result) {
 		if (err) {
 			console.log("find user by username error: " + error);
-			res.send("find user by username error: " + error);
-		} else if (result.length < 1) {
+			// res.send("find user by username error: " + error);
+			res.json({
+				id: -1,
+				status: 'failed',
+				detail: err
+			});
+		} else if (!result) {
 			console.log(result);
-			res.send("username not exist!");
+			// res.send("username not exist!");
+			res.json({
+				id: -1,
+				status: "failed",
+				detail: "username not exist"
+			});
 		} else {
 			if (req.body.password != result.password) {
-				res.send("password error");
+				// res.send("password error");
+				res.json({
+					id: -1,
+					status: "failed",
+					detail: "user password error"
+				});
 			} else {
-				res.send("login success");
+				req.session.user = result.username;
+				req.session.id = result._id;
+				res.json({
+					id: result._id,
+					status: "success",
+					detail: ""
+				});
 			}
 		}
 	});
@@ -38,22 +59,41 @@ router.post('/register', function(req, res) {
 	var conditions = {
 		username: req.body.username
 	};
-	userModel.find(conditions, function(err, result) {
+	// console.log("nad" + req.body.username)
+	userModel.findOne(conditions, function(err, result) {
 		if (err) {
-			console.log("find user by username error: " + error);
-			res.send("find user by username error: " + error);
-		} else if (result.length > 0) {
-			console.log("username: " + result);
-			res.send("username exist!");
+			console.log("find user by username error: " + err);
+			// res.send("find user by username error: " + error);
+			res.json({
+				id: -1,
+				status: 'failed',
+				detail: err
+			});
+		} else if (result) {
+			console.log("user: " + result);
+			res.json({
+				id: -1,
+				status: "failed",
+				detail: "username exist"
+			});
 		} else {
 			var user = new userModel(req.body);
-			user.save(function(error) {
+			user.save(function(error, data) {
 				if (error) {
-					console.log("insert user error: " + error);
-					res.send("insert user error: " + error);
+					console.log("insert user error: " + err);
+					res.json({
+						id: -1,
+						status: "failed",
+						detail: err
+					});
 				} else {
-					console.log('saved OK!');
-					res.send("register success!")
+					console.log('insert user success!');
+					// console.log("result:" + res)
+					res.json({
+						id: data._id,
+						status: "success",
+						detail: ""
+					});
 				}
 			});
 		}
