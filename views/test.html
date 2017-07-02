@@ -26,8 +26,22 @@
 
 <body>
     <div id="wrapper">
-        <% include header.html %>
-        <% include dashboard.html %> 
+        <% include header.html %> 
+        <% if(name =='dashboard') { %>
+            <% include dashboard.html %> 
+        <% } else if (name == 'charts') { %>
+            <% include char.html %>
+        <% } else if (name == 'table') { %>
+            <% include table.html %>
+        <% } else if (name == 'forms') { %>
+            <% include forms.html %>
+        <% } else if (name == 'elements') { %>
+            <% include elements.html %>
+        <% } else if (name == 'grid') { %>
+            <% include grid.html %>
+        <% } else if (name == 'blank') { %>
+            <% include blankpage.html %>
+        <% } %>
     </div>
     <script src="/static/jquery/jquery-3.2.1.js"></script>
     <script src="/static/jquery/jquery-3.2.1.min.js"></script>
