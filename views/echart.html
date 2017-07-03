@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title><%=name%> desigin</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<script src="/static/jquery/jquery-3.2.1.min.js"></script>
+	<script src="/static/bootstrap/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap.min.css">
+</head>
+<body>
+<nav id="navbar-example" class="navbar navbar-inverse navbar-static" role="navigation">
+  <div class="container-fluid"> 
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" data-toggle="collapse" 
+          data-target=".bs-js-navbar-scrollspy">
+        <span class="sr-only">切换导航</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">教程名称</a>
+    </div>
+    <div class="collapse navbar-collapse bs-js-navbar-scrollspy">
+      <ul class="nav navbar-nav">
+        <li><a href="#ios">iOS</a></li>
+        <li><a href="#svn">SVN</a></li>
+        <li class="dropdown">
+          <a href="#" id="navbarDrop1" class="dropdown-toggle" 
+             data-toggle="dropdown">Java
+            <b class="caret"></b>
+          </a>
+          <ul class="dropdown-menu" role="menu" 
+            aria-labelledby="navbarDrop1">
+            <li><a href="#jmeter" tabindex="-1">jmeter</a></li>
+            <li><a href="#ejb" tabindex="-1">ejb</a></li>
+            <li class="divider"></li>
+            <li><a href="#spring" tabindex="-1">spring</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div> 
+</nav>
+<div class="container">
+  <!-- <div class="jumbotron">  -->
+ <!--  <div class="row">
+    <h1><p><%=name%> desigin</p></h1>
+  </div> -->
+  <div class="row">
+      <div class="col-sm-6">
+        <div id="map" style="width: 600px;height:400px;"></div>
+      </div>
+      <div class="col-sm-6">
+        <div id="char" style="width: 600px;height:400px;"></div>
+      </div>
+  </div>
+  <div class="row">
+      <div class="col-sm-6">
+        <div id="map1" style="width: 600px;height:400px;"></div>
+      </div>
+      <div class="col-sm-6">
+        <div id="char1" style="width: 600px;height:400px;"></div>
+      </div>
+  </div>
+</div>
+<script src="/static/echart/echarts.min.js"></script>
+<script src="/static/js/index.js"></script>
+</body>
+</html>
